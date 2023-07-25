@@ -1,0 +1,14 @@
+.Header_class{
+    background-color: aqua;
+    height : 10rem;
+    }
+.Records_class{
+    width:33%;
+    background-color: red;
+    float:left;
+}
+.Calendar_class{
+    background-color: blue;
+    width:67%;
+    float:right;
+}

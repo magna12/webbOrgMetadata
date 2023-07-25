@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ConnectedApp xmlns="http://soap.sforce.com/2006/04/metadata">
+    <contactEmail>Shadowfax@gmaill.comm</contactEmail>
+    <label>UCMDB Integration</label>
+    <oauthConfig>
+        <callbackUrl>https://login.salesforce.com/</callbackUrl>
+        <consumerKey>3MVG9d8..z.hDcPIBkskecbHI_CX.4pAns_cDOWI0K5IY9suPHaf3.b3OoUZWqz1izehHFDQ9ae9v9Dpq8lmf</consumerKey>
+        <isAdminApproved>false</isAdminApproved>
+        <isConsumerSecretOptional>false</isConsumerSecretOptional>
+        <isIntrospectAllTokens>false</isIntrospectAllTokens>
+        <isSecretRequiredForRefreshToken>true</isSecretRequiredForRefreshToken>
+        <scopes>Full</scopes>
+    </oauthConfig>
+    <oauthPolicy>
+        <ipRelaxation>ENFORCE</ipRelaxation>
+        <refreshTokenPolicy>zero</refreshTokenPolicy>
+    </oauthPolicy>
+</ConnectedApp>

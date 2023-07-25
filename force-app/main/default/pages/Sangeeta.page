@@ -1,0 +1,420 @@
+<apex:page showHeader="false" controller="sangeeta_apex" docType="html-5.0">
+    <script>
+    function run()
+    			{
+                    
+                   
+                    var name=document.getElementById("{!$Component.f1.us1.us2.u1}").value;
+                    var phone=document.getElementById("{!$Component.f1.us1.us2.u2}").value;
+                    var email=document.getElementById("{!$Component.f1.us1.us2.u3}").value;
+                    var aadhar=document.getElementById("{!$Component.f1.us1.us2.u4}").value;
+                    var username=document.getElementById("{!$Component.f1.us1.us2.u5}").value;
+                    var password=document.getElementById("{!$Component.f1.us1.us2.u6}").value;
+                    var upperCaseLetters = /[A-Z]/g;
+                    var numbers = /[0-9]/g;
+                    var format = /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
+                     if(phone>999999999&&phone<9999999999){
+                       if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)){
+                           if(email.length!=0){
+                               if(aadhar.length!=0){
+                                   if(name.length!=0){
+                                       if(username.length!=0){
+                                           if(password.length!=0){
+                                                if(password.match(format)){
+                                                     if(password.match(upperCaseLetters)){
+                                                         if(password.match(numbers)){
+                                                              if(password.length>=8){
+                    CallApexMethod1();
+                                                                  }
+                                                             else
+                                                                  alert("The password should be of atleat 8 characters");
+                                                             }
+                                                         else
+                                                             alert("Password should contain atleast one number");
+                                                             
+                           
+                                                        }
+                                                    else
+                                                          alert("Password should contain atleast one uppercase character");
+                                                    }
+                                               else
+                                                   alert("Password should contain atleast one special character");
+
+                                               }
+                                           else
+                                               alert('Password cant be empty');
+                                           }
+                                       else
+                                           alert('wrong');
+                                       }
+                                   else{
+                               alert('Name cant be empty');
+                               }
+                                       
+                                   }
+                               else{
+                                   alert('Aadhar number cant be empty');
+                                   }
+                               }
+                           
+                        }
+                       else{
+                             alert('Invalid email adress')
+                               }
+                       }
+                    else{
+                        alert('Invalid Phone number');
+						 }
+                          
+
+                    }
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+					<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+           		    <script>
+            			$(function()
+                          {
+ 							$('.carousel').carousel({
+ 							interval : 2000
+ 						   });
+ 					
+ 						$('.carousel').hover(function()
+                             {
+ 								$(this).carousel('pause');
+ 						      }
+ 						,function(){
+ 							$(this).carousel('cycle');
+ 							  });
+ 			                });
+                function e()
+                {
+                    var str3=document.getElementById("{!$Component.f1.p1.p2.d3}").value;
+                       var str4=document.getElementById("{!$Component.f1.p1.p2.d4}").value;
+                      var str1=document.getElementById("{!$Component.f1.p1.p2.d1}").value;
+                       var str2=document.getElementById("{!$Component.f1.p1.p2.d2}").value;
+                       
+                   
+                   if(str1>999999999&&str1<9999999999){
+                       if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(str2)){
+                           if(str3.length!=0){
+                               if(str4.length!=0){
+                    CallApexMethod();
+                                   }
+                               else{
+                                   alert('Amount cant be empty');
+                                   }
+                               }
+                           else{
+                               alert('Name cant be empty');
+                               }
+                        }
+                       else{
+                             alert('Invalid email adress')
+                               }
+                       }
+                    else{
+                        alert('Invalid Phone number');
+						 }
+                          
+
+                    }
+    
+    
+                    
+   					</script>
+
+    <apex:form id="f1" >
+    	<html lang="en">
+			<head>
+				<title>Bootstrap Example</title>
+    				<meta charset="utf-8"/>
+    				<meta name="viewport" content="width=device-width, initial-scale=1"/>
+    				<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+					          <style>
+                .container
+                    {
+                  width:85%;
+                  height:80%;
+                    }
+                #logo
+                    {
+                   height:160px;
+                    }
+                #logo1
+                    {
+                  height:150px;
+                  float:left;
+                  width:70%;
+                	}
+               #login
+                   {
+                 float:right;
+                 width:30%;
+                 height:150px;
+                  }
+               #button1
+                  {
+                 color:black;
+                 height:25%;
+                 width:45%;
+                 font-size:15px;
+                 margin-top:50px;
+                 margin-left:-50px;
+                  }
+               #button2
+                  {
+                 color:black;
+                 height:25%;
+                 width:50%;
+                 font-size:15px;
+                 margin-top:50px;
+                  }
+               #nav-bar
+                  {
+                 width:20%;
+                 float:left;
+                 position:absolute;
+                  }
+               
+                 a{
+                font-size:20px;
+                  }
+              #slider
+                  {
+                float:right;
+                height:25%;
+                width:75%;
+                position:relative;
+                overflow:hidden;
+                  }
+       </style>
+		    </head>
+            <apex:pageBlock >
+                <apex:message />
+            </apex:pageBlock>
+		        <body style="background-image:url('{!$Resource.image1}'); background-repeat:no-repeat">
+           	 <div id="logo">
+                <div id="logo1">
+                  <apex:image url="{!$Resource.logo}" width="200" height="140"/>
+                </div>
+                <div id="login">
+                  <a href="#" class="button" id="button1" data-toggle="modal" data-target="#log_in">
+                   LOGIN
+                  </a>
+                  <a href="#" class="button" id="button2" data-toggle="modal" data-target="#signup">
+                    SIGN UP
+                  </a>
+                </div>
+            </div> 
+            
+           <div class="container">
+                 <div class="container-fluid" id="nav-bar">
+                    <nav class="navbar navbar-inverse">
+ 					<ul class="nav">
+                        <li><a href="#" data-toggle="modal" data-target="#donation"><Strong>Donations</Strong></a></li><br/>
+                		<li><a href="#" data-toggle="modal" data-target="#adoption"><strong>Adoptions</strong></a></li><br/>
+                		<li><a href="#" data-toggle="modal" data-target="#volunteer"><strong>Events</strong></a></li>
+           			 </ul>
+                    </nav>
+            	</div>
+                      
+            	<div class="container-fluid" id="slider">
+ 					<div class="carousel slide" id="myCarousel" dataride="carousel">
+ 					 	<ol class="carousel-indicators">
+ 							<li data-target="#myCarousel" data-slide-to="0"
+								class="active">
+ 						    </li>
+ 							<li data-target="#myCarousel" data-slide-to="1">
+ 							</li>
+ 							<li data-target="#myCarousel" data-slide-to="2">
+ 							</li>
+ 						</ol>
+ 				 
+                    <div class="carousel-inner">
+ 						<div class="item active">
+     						<apex:image url="{!$Resource.image1}" width="900" />
+						<div class="carousel-caption">
+ 								<p>
+ 									First Slide
+ 								</p>
+ 						</div>
+ 						</div>
+ 					<div class="item">
+     					<apex:image url="{!$Resource.image1}" width="900" />
+ 							<div class="carousel-caption">
+ 								<p>
+ 									Second Slide
+ 								</p>
+ 							</div>
+ 					</div>
+ 					<div class="item">
+     					<apex:image url="{!$Resource.image1}" width="900" />
+ 							<div class="carousel-caption">
+ 								<p>
+ 									Third Slide
+ 								</p>
+ 							</div>
+ 					</div>
+ 					</div>
+ 					  <a class="left carousel-control" href="#myCarousel"
+						data-slide="prev">
+ 						<span class="glyphicon glyphicon-chevron-left">
+ 						</span>
+ 						<span class="sr-only">
+ 							Previous
+ 						</span>
+ 					  </a>
+ 					  <a class="right carousel-control" href="#myCarousel"
+						data-slide="next">
+ 							<span class="glyphicon glyphicon-chevron-right">
+ 							</span>
+ 							<span class="sr-only">
+ 								Previous
+ 							</span>
+ 					  </a>
+ 					</div>
+ 				</div>
+        	</div>
+   <div id="donation" class="modal fade" role="dialog" >
+   <div class="modal-dialog">
+   <!-- Modal content-->
+   <div class="modal-content">
+   <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Enter your details</h4>
+    </div>
+    <div class="modal-body">
+        <apex:pageBlock id="p1" >
+            <apex:pageBlockSection id="p2" >
+            <apex:inputField value="{!details.Name}" type="text"  id="d3" />
+        <br/>
+        	<apex:inputField value="{!details.Phone_number__c}" type="number"   id="d1"/>
+        <br/>
+        <apex:inputField value="{!details.Email__c}" type="email"  id="d2"  />
+        <br/>	
+        <apex:inputField value="{!details.Amount__c}" type="number" id="d4" />
+                
+                </apex:pageBlockSection>
+        </apex:pageBlock>
+    </div>
+    <div class="modal-footer">
+       <apex:commandButton value="Pay" onclick="e();return false;"/>
+<apex:actionFunction name="CallApexMethod" action="{!donationDetails}" ></apex:actionFunction>        
+    </div>
+   </div>
+  </div>
+ </div>
+	<div id="adoption" class="modal fade" role="dialog">
+   		<div class="modal-dialog">
+   		<!-- Modal content-->
+   			<div class="modal-content">
+   				<div class="modal-header">
+        			<button type="button" class="close" data-dismiss="modal">&times;</button>
+        				<h4 class="modal-title">Modal Header</h4>
+    			</div>
+    		<div class="modal-body">
+        		<p>Some text in the modal.</p>
+    		</div>
+    			<div class="modal-footer">
+        		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    			</div>
+   			</div>
+  		</div>
+	</div>
+            
+<div id="volunteer" class="modal fade" role="dialog" >
+   <div class="modal-dialog">
+   <!-- Modal content-->
+   <div class="modal-content">
+   <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+    </div>
+    <div class="modal-body">
+                           <apex:pageblock >
+                                 
+                                    <apex:pageblocktable value="{!eventlist}" var="a">
+                                     <apex:column value="{!a.Name}" />
+                                   
+                                     <apex:column value="{!a.Amount__c}"/>
+                                      
+                                     <apex:column >
+                                         <apex:commandLink action="{!showevent}" value="conduct" >
+                                             <apex:param name="eve" value="{!a.Amount__c}"  assignTo="{!EventAmount}"/>
+                                         </apex:commandLink>
+                                     </apex:column>
+                                     
+                                 </apex:pageblocktable>
+                                 
+                                 
+                             </apex:pageblock>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
+    </div>
+    </div>
+</div>
+                    
+<div id="signup" class="modal fade" role="dialog">
+   <div class="modal-dialog">
+   <!-- Modal content-->
+   <div class="modal-content">
+   <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title" style="color:blue;">USER DETAILS</h4>
+    </div>
+    <div class="modal-body">
+         <apex:pageBlock id="us1" >
+            <apex:pageBlockSection id="us2" >
+                    		<apex:inputField value="{!ur.Name}"  id="u1"/><br/>
+        		<apex:inputField value="{!ur.Phone__c}"  id="u2"/><br/>
+        		<apex:inputField value="{!ur.Email__c}"  type="email" id="u3"  /><br/>	
+        		<apex:inputField value="{!ur.Aadhar_Number__c}"  id="u4" /><br/>
+                                <apex:inputField value="{!ur.Username__c}" type="text" id="u5"/>
+                <apex:inputField value="{!ur.Password__c}" type="text"  id="u6"/>
+
+             
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        
+    	</div>
+       <div class="modal-footer">
+          <apex:commandButton value="Submit" onclick="run();return false;"/>
+		  <apex:actionFunction name="CallApexMethod1" action="{!registed_users}"/>
+       </div>
+    </div>
+  </div>
+</div>
+                    
+   <div id="log_in" class="modal fade" role="dialog">
+   <div class="modal-dialog">
+   <!-- Modal content-->
+   <div class="modal-content">
+   	<div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title" style="color:blue;">USER DETAILS</h4>
+    </div>
+    <div class="modal-body" style="margin-top:-30px;">
+        <div id="name" style="width:40%; float:left;" class="modal-body">
+            Username:<br/><br/>
+            Password:<br/><br/>
+        </div>
+        <div id="input" style="width:60%; float:right;" class="modal-body">
+            
+             
+               <apex:inputText value="{!Username}" id="id36"></apex:inputText><br/><br/>
+               <apex:inputText value="{!Password}" id="id37"></apex:inputText><br/><br/>
+            
+         </div>
+    	</div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Sign In</button>
+    </div>
+    </div>
+    </div>
+</div>
+</body>
+  	</html>
+    </apex:form>
+</apex:page>

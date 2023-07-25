@@ -1,0 +1,67 @@
+<aura:component >
+    <aura:attribute name="DateValue" type="Date" default=""/>
+    <aura:attribute name="MonthValue" type="Integer" default=""/>
+    <aura:attribute name="Amount" type="Integer" default=""/>
+    <aura:attribute name="displayList" type="Object"/>
+    <aura:attribute name="displayList2" type="Object"/>
+    <div class="slds-grid slds-gutters" style="width:50%;">
+        <div class="slds-col" style="width:30%;">
+            <fieldset class="slds-box slds-theme--default slds-container--small">
+                <legend id="newexpenseform" class="slds-text-heading--small 
+                                                   slds-p-vertical--medium">
+                    Enter Values        </legend>
+                
+                <!-- CREATE NEW EXPENSE FORM -->
+                <form class="slds-form--stacked">          
+                    <lightning:input aura:id="expenseform" label="Enter Date"
+                                     name="expensename"
+                                     type="Date"
+                                     value="{!v.DateValue}"
+                                     required="true"/> 
+                    <lightning:input aura:id="expenseform" label="Number of Months"
+                                     name="expenseclient"
+                                     value="{!v.MonthValue}"
+                                     placeholder="Enter number of months here"/>
+                    <lightning:input type="Number" aura:id="expenseform" label="Enter Amount"
+                                     name="expensedate"
+                                     value="{!v.Amount}"/>
+                    <lightning:button label="Create Expense" 
+                                      class="slds-m-top--medium"
+                                      variant="brand"
+                                      onclick="{!c.clickCreate}"/>
+                </form>
+                <!-- / CREATE NEW EXPENSE FORM -->
+                
+            </fieldset>        
+        </div>
+        <div class="slds-col" style="margin-top:24px;">
+            
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+                <thead>
+                    <tr class="slds-line-height_reset">
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Opportunity Name">Month</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Account Name">Amount</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <aura:iteration items="{!v.displayList}" var="obj">
+                        
+    <tr class="slds-hint-parent">
+                            <td data-label="Account Name">
+        <div class="slds-truncate" title="Cloudhub">{!obj.label}</div>
+      </td>                  <td data-label="Account Name">
+        <div class="slds-truncate" title="Cloudhub"><lightning:input name="{!obj.label}" value="{!obj.value}" onchange="{!c.calculate}"></lightning:input></div>
+      </td>
+                        </tr>
+                    </aura:iteration> 
+                </tbody>
+            </table>
+           </div>
+        
+    </div>
+    
+</aura:component>

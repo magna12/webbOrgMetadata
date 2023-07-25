@@ -1,0 +1,78 @@
+<apex:page controller="markea_3" docType="html-5.0" >
+    <script type="text/javascript">
+    function b() {
+        
+           var str1=document.getElementById("{!$Component.f.e.someid}").value;
+            var n = str1.length;
+            if(n==15||n==18)
+              CallApexMethod();
+            else{
+                alert("Id should be either 15 character or 18 character");
+                location.reload();
+            }
+        }
+        function c(Str){
+             CallApexMethod1();
+            
+        }
+    function d(Str){
+             CallApexMethod2();
+            
+        }
+    function e(Str){
+             CallApexMethod3();
+            
+        }
+    </script>
+    <apex:form id="f">
+    <apex:pageBlock title="Show Records" id="e">
+       
+           
+           <apex:input value="{!opoid}" id="someId"/>
+        <apex:commandButton value="Search" oncomplete="b()" />
+           <apex:actionFunction name="CallApexMethod" action="{!searchid}"></apex:actionFunction>
+    </apex:pageBlock>
+    <apex:pageBlock >
+        <apex:pageBlockTable value="{! myOpportunities1}"  var="b">
+                     <apex:column value="{!b.id}"/>
+            		 <apex:column value="{!b.Alphabelts__c}" />
+            <apex:inlineEditSupport event="ondblClick"
+                        showOnEdit="saveButton,cancelButton" hideOnEdit="editButton" />
+        		 </apex:pageBlockTable>
+                            <apex:commandButton value="Submit" oncomplete="c()" />
+                   <apex:actionFunction name="CallApexMethod1" action="{!A}"></apex:actionFunction>
+            
+			
+
+        </apex:pageBlock>
+        <apex:pageBlock >
+        <apex:pageBlockTable value="{! myOpportunities2}"  var="b">
+                     <apex:column value="{!b.id}"/>
+            		 <apex:column value="{!b.Alphabelts__c}" />
+            <apex:inlineEditSupport event="ondblClick"
+                        showOnEdit="saveButton,cancelButton" hideOnEdit="editButton" />
+               
+           
+
+        		 </apex:pageBlockTable>
+                                <apex:commandButton value="Submit" oncomplete="d()" />
+                    <apex:actionFunction name="CallApexMethod2" action="{!B}"></apex:actionFunction>
+
+
+        </apex:pageBlock>
+        <apex:pageBlock >
+        <apex:pageBlockTable value="{! myOpportunities3}"  var="b">
+                     <apex:column value="{!b.id}"/>
+            		 <apex:column value="{!b.Alphabelts__c}" />
+            <apex:inlineEditSupport event="ondblClick"
+                        showOnEdit="saveButton,cancelButton" hideOnEdit="editButton" />
+
+        		 </apex:pageBlockTable>
+                    <apex:commandButton value="Submit" oncomplete="c(e)" />
+                       <apex:actionFunction name="CallApexMethod3" action="{!C}"></apex:actionFunction>
+
+
+
+        </apex:pageBlock>
+        </apex:form>
+</apex:page>

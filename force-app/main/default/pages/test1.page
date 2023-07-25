@@ -1,0 +1,67 @@
+<apex:page standardController="Account" extensions="testApexClass">
+    <style>
+        table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+input[type=text], select {
+  width: 40%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+    </style>
+    <script>
+    function findRecord(){
+        var test = '{!test}';
+        console.log("Check: " + JSON.parse(test)[0].Name);
+        var recordName='{!recordName}';
+        var recordList='{!accList}';
+                alert('size'+recordList.length);
+				var displayList='{!displayList}';
+        // console.log("Test: "+recordList);
+        	for(var i in recordList){
+                //console.log(JSON.stringify(recordList[i]));
+            //alert(accRecord.name);
+            // if(accRecord.name.contains(recordName)
+            //displayList.push(accRecord);
+         }
+        //alert('Display Size'+displayList.length);
+        //document.getElementById('list').value=displayList;
+              
+        }
+    </script>
+    <apex:form >
+<b><label for="fname">First Name</label></b>
+    <input type="text" value="{!recordName}" onkeyup="findRecord()" id="fname" placeholder=" Enter record name.."/>    
+        </apex:form>
+    <table>
+  <tr>
+    <th>Check</th>
+    <th>Name</th>
+    <th>Rating</th>
+    <th>Website</th>
+  </tr>
+        <apex:repeat id="list" value="{!displayList}" var="Acc">
+            <tr>
+                <td><input type="checkbox" class="filled-in" checked="checked" /></td>
+                <td>{!Acc.Name}</td>
+                <td>{!Acc.Rating}</td>
+                <td>{!Acc.Website}</td>
+            </tr>
+        </apex:repeat>
+    </table>
+</apex:page>

@@ -1,0 +1,32 @@
+<template>
+    <lightning-card title="Showing Cases" icon-name="custom:custom63">
+    <table id="casetable">
+        <tr>
+            <th>Case Number</th>
+            <th>Subject</th>
+            <th>Status</th>
+            <th>Date/Time Opened</th>
+            <th>Case Owner Alias</th>
+    </tr>
+    <template for:each={allCases.data} for:item="caseinsta">
+        <tr key={caseinsta.id}>
+            <td>
+                <p>{caseinsta.CaseNumber}</p>
+            </td>
+            <td>
+                <p>{caseinsta.Subject}</p>
+            </td>
+            <td>
+                <p>{caseinsta.Status}</p>
+            </td>
+            <td>
+                <p>{caseinsta.CreatedDate}</p>
+            </td>
+            <td>
+                <p>{caseinsta.Owner.alias}</p>
+            </td>
+        </tr>
+        </template>
+    </table>
+</lightning-card>
+</template>

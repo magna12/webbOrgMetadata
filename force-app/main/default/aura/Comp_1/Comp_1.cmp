@@ -1,0 +1,66 @@
+<aura:component controller="Apex1_1">
+       	<aura:attribute name="last" type="Integer" default="0"/>
+        <aura:attribute name="leads" type="List" />
+        <aura:attribute name="leads1" type="List" />
+        <aura:attribute name="leads2" type="List" />
+        <aura:attribute name="recordsPerPage" type="Integer" default="5"/>
+    	<aura:attribute name="recordsPerPage1" type="Integer" default="0"/>
+        <aura:attribute name="alreadyDone" type="Integer" default="0"/>
+        <aura:attribute name="show1" type="Boolean" default="true" />
+    	<aura:attribute name="show2" type="Boolean" default="true"/>
+    	<aura:attribute name="fieldValue" type="String"/>
+    	<aura:attribute name="SearchKeyWord" type="String"/>
+        <aura:handler name="init" value="{!this}" action="{!c.getRecord}" />
+     <div class="slds-align_absolute-center" style="float:left;">
+    <div class="slds-align_absolute-center" >
+          <select id="select1" value="{!v.recordsPerPage}" onchange="{!c.getSize}" name="picklist1" >
+        <option>5</option>
+        <option>10</option>
+        <option>15</option>
+        </select>
+        </div>
+   
+</div>
+    
+    <div class="slds-align_absolute-center" style="float:right;">
+    <div class="slds-align_absolute-center" value="{!v.fieldValue}">
+      <select class="slds-select" id="select-01" onChange="{!fieldValue}">
+        <option >Choose field</option>
+        <option>Name</option>
+        <option>Status</option>
+        <option>Email</option>
+      </select>
+        </div>
+   
+  
+        <ui:inputText updateOn="keyup"   
+                      keyup="{!c.searchRecords}" 
+                      class="slds-lookup__search-input slds-input inputSize"
+                      value="{!v.SearchKeyWord}"
+                      placeholder="search.."/>
+         <lightning:buttonIcon iconName="utility:search" variant="bare" onclick="{! c.searchRecords }" alternativeText="Search" class="slds-input__icon" />
+    </div>
+        <table class="slds-table slds-table_bordered slds-table_striped slds-table_cell-buffer slds-table_fixed-layout">
+          <thead>
+            <tr class="slds-text-heading_label">
+              <th scope="col"><div class="slds-truncate" >Name</div></th>
+              <th scope="col"><div class="slds-truncate" >Status</div></th>
+              <th scope="col"><div class="slds-truncate" >Email</div></th>
+            </tr>
+          </thead>
+          <tbody>
+            <aura:iteration items="{!v.leads}" var="lead">
+                <tr>
+                    <td><div class="slds-truncate" >{!lead.Name}</div></td>
+                    <td><div class="slds-truncate" >{!lead.Status}</div></td>
+                    <td><div class="slds-truncate" >{!lead.Email}</div></td>
+                </tr>
+            </aura:iteration>
+            
+          </tbody>
+        </table>
+    <div class="slds-align_absolute-center">
+        <lightning:button class="slds-button_icon-brand" disabled="{!v.show1}" onclick="{!c.previous}" >-</lightning:button>
+        <lightning:button class="slds-button_icon-brand" disabled="{!v.show2}" onclick="{!c.next}">+</lightning:button>
+			</div>
+      </aura:component>

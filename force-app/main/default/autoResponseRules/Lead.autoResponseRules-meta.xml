@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AutoResponseRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <autoResponseRule>
+        <fullName>autoresponce</fullName>
+        <active>false</active>
+        <ruleEntry>
+            <criteriaItems>
+                <field>Lead.Email</field>
+                <operation>notEqual</operation>
+                <value>NULL</value>
+            </criteriaItems>
+            <senderEmail>1996devs05@gmail.com</senderEmail>
+            <senderName>Debesh</senderName>
+            <template>unfiled$public/SalesNewCustomerEmail</template>
+        </ruleEntry>
+    </autoResponseRule>
+    <autoResponseRule>
+        <fullName>task_lead</fullName>
+        <active>false</active>
+        <ruleEntry>
+            <criteriaItems>
+                <field>Lead.LeadSource</field>
+                <operation>equals</operation>
+                <value>Web</value>
+            </criteriaItems>
+            <senderEmail>1996devs05@gmail.com</senderEmail>
+            <senderName>lead Autoresponce</senderName>
+            <template>unfiled$public/lead_responce</template>
+        </ruleEntry>
+    </autoResponseRule>
+    <autoResponseRule>
+        <fullName>test</fullName>
+        <active>true</active>
+    </autoResponseRule>
+</AutoResponseRules>

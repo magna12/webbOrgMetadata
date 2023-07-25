@@ -1,0 +1,79 @@
+.THIS {
+    border-style: none;
+    background-color:#FFFFFF;
+}
+.THIS .slds-form-element__label{
+    color:#16325c;
+    
+}
+.THIS.container1{
+    border-style: groove;
+    background-color:#FFFFFF;
+    border-width: 5px;
+    
+}
+.THIS .slds-tabs_default{
+    background-color:#FFFFFF;
+    border-style: none;
+    font-size:20px;
+    
+}
+.THIS .picklist{
+    border-style: none;
+    margin-top:2%;
+    font-size:15px;
+    width:50%
+}
+.THIS .tab{
+    float: left;
+    /*border: 1px solid #ccc;*/
+    /*background-color: #f1f1f1;*/
+}
+.THIS .tab button {
+    display: block;
+    background-color: inherit;
+    /*color: black;*/
+    /*padding: 22px 16px;*/
+    width: 100%;
+    /*border: none;
+    outline: none;
+    text-align: left;*/
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 17px;
+}
+.THIS .tab button:hover {
+    background-color: white;
+    color:#16325c;
+}
+
+.THIS.slds-m-around_medium{
+    margin-left:14%;
+} 
+.THIS .slds-m-left_x-medium{
+    width:15%;
+    margin-top:5px;
+    color:white;
+    background:blue;
+    margin-left:28%;
+}
+.THIS .slds-input {
+    width:90%;
+}
+.THIS .slds-button{
+    border:none;
+}
+.THIS .Cancel{
+    width:15%;
+    margin-top:5px;
+    color:white;
+    background:red;
+    margin-left:28%; 
+}
+.THIS .slds-y-left_x-medium{
+    width:15%;
+    margin-top:5px;
+    color:white;
+    background:red;
+    margin-left:28%;
+}

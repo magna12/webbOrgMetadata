@@ -1,0 +1,16 @@
+<aura:component controller="RatingApex" implements="flexipage:availableForRecordHome,force:hasRecordId,force:hasSObjectName" access="global">
+    <aura:attribute name='value' type='Integer' default='0' />
+    <aura:attribute name="starValue" type="INteger" default="0"/>
+    <aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="PickList" type="String"/>
+    <aura:attribute name="pickList1" type="List"/>
+    <aura:attribute name='readonly' type='boolean' default='true' />
+    <p><b>Give rating to this record</b></p>
+    <ltng:require styles="{!$Resource.fivestar + '/rating.css'}"
+                  scripts="{!$Resource.fivestar + '/rating.js'}"
+                  afterScriptsLoaded="{!c.afterScriptsLoaded}" />
+<span class="rating" data-stars="10"></span>
+    <aura:handler name='change' value="{!v.value}" action="{!c.onValueChange}" />
+
+    <ul aura:id='ratingArea' class="{!v.readonly ? 'readonly c-rating' : 'c-rating' }" />
+</aura:component>

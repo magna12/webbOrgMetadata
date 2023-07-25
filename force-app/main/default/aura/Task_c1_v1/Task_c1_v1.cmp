@@ -1,0 +1,11 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >      
+            	<div class="slds-align_absolute-center">
+                                            <lightning:icon iconName="utility:note" alternativeText="My Expenses"/>
+                    <button>
+            	         <lightning:icon iconName="utility:adduser" alternativeText="My Expenses"/>
+          			</button>
+                        <form class="slds-form--stacked"> 
+              
+        </form>
+    </div>
+</aura:component>

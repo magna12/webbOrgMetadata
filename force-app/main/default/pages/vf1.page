@@ -1,0 +1,88 @@
+<apex:page controller="Apex4" docType="html-5.0">
+   <script type="text/javascript">
+       
+        function b() {
+           var str1=document.getElementById("{!$Component.f.e.someid}").value;
+            var n = str1.length;
+            if(n>3)
+              CallApexMethod();
+            else{
+                alert("Enter String of more then 3 character,try again");
+                location.reload();
+            }
+        }
+    </script> 
+    <apex:form id="f" >
+    <apex:pageBlock title="Show Records" id="e">
+       
+           
+           <apex:input value="{!SearchedName}" id="someId"/>
+           
+ 	<apex:commandButton action="{!searchedRecord}" value="Search" oncomplete="b()" />
+               <apex:actionFunction name="CallApexMethod" action="{!searchedRecord}"></apex:actionFunction>
+
+       	<apex:pageBlockTable value="{!recordList}" var="a">
+            <apex:column width="10px">
+
+                    <input type="radio" name="group1" />
+                
+                        <apex:actionSupport event="onclick" action="{!dispalyOpportunity}" ReRender="Re1" >
+						<apex:param assignTo="{!accId}" name="accname1" value="{!a.id}"/>
+                           
+                        </apex:actionSupport>
+                
+                 <apex:actionSupport event="onclick" action="{!dispalyContact}" ReRender="Re2" >
+                     <apex:param assignTo="{!accId}" name="accname" value="{!a.id}"/>
+
+                    </apex:actionSupport>
+                    
+					 
+
+                </apex:column>
+            <apex:column value="{!a.id}" />
+           	<apex:column value="{!a.Name}" />
+           	<apex:column value="{!a.Industry}" />
+               
+
+       	</apex:pageBlockTable>
+   </apex:pageBlock>
+         <apex:pageBlock title=" Related Contacts" id="Re2" >
+
+            <apex:outputPanel rendered="{!conList.size == 0}">
+
+                <b> No Contacts</b>
+
+            </apex:outputPanel>
+
+            <apex:outputPanel rendered="{!conList.size != 0}">
+
+                <apex:pageBlockTable value="{!conList}" var="con">
+					 <apex:column value="{!con.id}" />
+                    <apex:column value="{!con.FirstName}" />
+
+                    <apex:column value="{!con.LastName}" />
+
+                </apex:pageBlockTable>
+        </apex:outputPanel>
+
+        </apex:pageBlock> 
+         <apex:pageBlock title=" Related Oportunity" id="Re1" >
+
+            <apex:outputPanel rendered="{!opoList.size == 0}">
+
+                <b> No Oportunities.</b>
+
+            </apex:outputPanel>
+
+            <apex:outputPanel rendered="{!opoList.size != 0}">
+
+                <apex:pageBlockTable value="{!opoList}" var="con1">
+					                    <apex:column value="{!con1.id}" />
+
+                    <apex:column value="{!con1.Amount}" />
+                 </apex:pageBlockTable>
+            </apex:outputPanel>
+
+      </apex:pageBlock> 
+ </apex:form>
+</apex:page>

@@ -1,0 +1,32 @@
+<apex:page title="webb" renderAs="pdf" >
+<apex:form >
+
+  <!-- Begin Default Content REMOVE THIS -->
+                         
+                       <apex:pageBlock helpTitle="follow the link" helpUrl="https://www.google.co.in/?gfe_rd=cr&dcr=0&ei=tniBWs2FD4imX8KMg-AJ" title="pageblock" >
+      <apex:pageBlockButtons location="top"  >
+      <apex:commandButton value="view"/ >
+      
+      
+      </apex:pageBlockButtons>
+              <apex:pageBlockSection title="pageBlockSection">
+                      <apex:pageBlockSectionItem dataTitle="pageBlockSectionItem" >
+                      
+             
+      
+  
+          <h1>Congratulations</h1>
+          This is your new Page
+          <!-- End Default Content REMOVE THIS -->
+                      </apex:pageBlockSectionItem>
+                   </apex:pageBlockSection>
+                   
+      </apex:pageBlock>
+       <apex:outputPanel >
+why
+  </apex:outputPanel> 
+
+     
+
+      </apex:form>
+</apex:page>

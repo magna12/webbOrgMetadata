@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Stafff</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Satffs</value>
+    </caseValues>
+    <layouts>
+        <layout>Staff</layout>
+        <sections>
+            <label></label>
+            <section>Adress</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <label></label>
+        <name>Staff</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <webLinks>
+        <label></label>
+        <name>Google</name>
+    </webLinks>
+</CustomObjectTranslation>

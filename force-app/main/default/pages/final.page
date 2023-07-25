@@ -1,0 +1,14 @@
+<apex:page extensions="attachPDFToAccount" standardController="Registered_User__c" renderAs="pdf">
+
+    
+   <apex:pageBlock >
+       <apex:pageBlocktable value="{!rcc}" var="a">
+       <apex:column value="{!rcc.name}"/>
+       
+       </apex:pageBlocktable>
+       
+       </apex:pageBlock>
+    
+    
+   
+</apex:page>

@@ -1,0 +1,125 @@
+<aura:component controller="ChatBoxApex" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <ltng:require scripts="{!join(',',
+                           $Resource.cometd,
+                           $Resource.Jquery151,
+                           $Resource.json2,
+                           $Resource.jquery_cometd)}"
+                  afterScriptsLoaded="{!c.ScriptLoaded}"/>
+    <aura:attribute name="ScheduleTime" type="DateTime"/>
+    <aura:attribute name="ScheduleDate" type="Date"/>
+    <aura:attribute name="ScheduleMessage" type="String"/>
+    <aura:attribute name="sessionId" type="String" />    
+    <aura:attribute name="selectedValue" type="String" default="test" />
+    <aura:attribute name="ScheduleAction" type="String"/>
+    <aura:attribute name="options" type="List" access="PRIVATE"/>
+    <aura:attribute name="ConatctName" type="String" />
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="ChatList" type="List" />
+    <aura:attribute name="mobilenoError" type="Boolean" default = "false" />
+    <aura:attribute name="caseorContact" type="Boolean" default="true"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doinit}" />
+    <aura:attribute name="isOpen" type="Boolean" default="false"/>
+    <aura:attribute name="scheduledError" type="String" default=""/>
+    <aura:attribute name="MobileNumber" type="String" default=""/>
+    <aura:attribute name="currentDate" type="DateTime"/>
+    <!--Displaying the chat Container-->
+    
+    <div class="slds-box" style="">
+        <div id="style"  class="slds-box slds-scrollable--y style" style="background:white;border-box;border-width:0px;height:350px;">
+            
+            <!--Passing reocrd to another component to display the messages-->
+            <aura:iteration items="{!v.ChatList}" var="obj">
+                <c:ChatBoxChat  chats="{!obj}"  />
+            </aura:iteration>
+            <aura:if isTrue="{!v.mobilenoError}">
+                <center>
+                    <div class="slds-box" style="width:100%;border-radius:10px;margin-top:70%;" >
+                        <div style="width:100%;margin-left:52.5%;margin-top:-6%;">
+                            <lightning:buttonIcon iconName="utility:close" class="Cancel" variant="bare" onclick="{! c.closeMobilenoError }" alternativeText="Settings" />
+                        </div>
+                        <span style="color:red;">Contact dosen't have a mobile number</span>
+                    </div>
+                </center>
+            </aura:if>
+        </div>
+        <!-- Creating input to send message-->
+            <div class=" slds-grid" style="margin-top:0.5px;height:40%;border-radius:5px;border:none;">
+                <div class="slds-input-has-icon slds-input-has-icon--right" style="margin-left:0%;background-color:white;width:100%;">
+                    <lightning:buttonIcon iconName="utility:send" variant="bare" alternativeText="Send" class="slds-input__icon" onclick="{!c.enterSend}"/>
+                    <input id="sendtextMsg" class="slds-input" type="text" onkeypress="{!c.entermethod}" value="" style="border-radius:5px;" /> 
+                </div>
+                
+            </div>
+    </div>
+    <!--Displaying available phone Number to send message from-->
+        
+        <div class="slds-grid slds-gutters">
+                <aura:if isTrue="{!v.caseorContact}">
+            <div class="slds-col slds-size_2-of-3" style="margin-top:5%;" >
+                <button style="width:100%;" class="slds-button slds-button_brand" label="Schedule a message" onclick="{!c.sceduleMessage}">Schedule a message</button>
+            </div>
+                        </aura:if>   
+            <div class="slds-col slds-size_1-of-3">
+                <span><b><lightning:select  name="colorId" label="Select an Action"  aura:id="colorId" value="{!v.selectedValue}">
+                    <aura:iteration items="{!v.options}" var="option">
+                        <option text="{!option.label}" selected="{!option.selected}">{!option}</option>
+                    </aura:iteration>
+                    </lightning:select></b></span>
+            </div>
+        </div>
+    
+    
+    <aura:if isTrue="{!v.isOpen}">
+        <center>
+            <!--<div class="page-section page-header" style="background-color:#D3D3D3; font-size:20px; border-style:groove;"> -->
+            <!--MODAL BOX to create and insert new phone number--> 
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <!-- ###### MODAL BOX HEADER Start ######-->
+                    
+                    <header class="slds-modal__header">
+                        <h2 class="slds-text-heading--medium slds-box" style="background:limegreen;color:white;"><b>SMS Scheduling</b></h2>
+                    </header>
+                    <!--Modal Box for message Scheduling-->
+                    <div class="slds-box" style="width:100%;background-color:white;border:none;">
+                        
+                        <center>
+                            <div style="width:75%;">
+                                <lightning:input type="datetime" name="input5" value="{!v.ScheduleTime}" min="{!v.currentDate}" />
+                                <br/>
+                                <br/>
+                                <textarea id="message" style="height:30%;" value="{!v.ScheduleMessage}" required="true" class="slds-textarea"  placeholder="Write your message here...">
+                                    
+                                </textarea>
+                                <button style="width:100%;" class="slds-button slds-button_brand" label="Send" onclick="{!c.createScheduleMessage}">Schedule</button>
+                                <lightning:select name="colorId" label="𝗦𝗲𝗹𝗲𝗰𝘁 𝗮𝗻 𝗔𝗰𝘁𝗶𝗼𝗻:" aura:id="colorId" value="{!v.ScheduleAction}">
+                                    <aura:iteration items="{!v.options}" var="option">
+                                        <option text="{!option.label}" selected="{!option.selected}">{!option}</option>
+                                    </aura:iteration>
+                                </lightning:select> 
+                            </div>
+                        </center>            
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <div class="slds-float_left" style="margin-left:30%;">
+                            <p style="color:red;">{!v.scheduledError}</p> 
+                        </div>
+                        <div class="slds-float_right">
+                            <lightning:button variant="neutral" 
+                                              label="Cancel"
+                                              title="Cancel"
+                                              onclick="{! c.closeModal }"/>
+                            
+                        </div>
+                    </footer>  
+                </div>
+                
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+            <!--###### MODAL BOX Part END Here ######-->
+        </center>
+        
+        
+    </aura:if>
+    
+</aura:component>

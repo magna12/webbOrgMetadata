@@ -1,0 +1,57 @@
+<apex:page controller="Apex5" docType="html-5.0" >
+     <script type="text/javascript">
+       
+        function b() {
+            location.reload();
+           var str1=document.getElementById("{!$Component.f.e.someid}").value;
+            var n = str1.length;
+            if(n>3){
+                CallApexMethod();
+                                
+}
+                
+            else{
+                alert("Enter String of more then 3 character,try again");
+                location.reload();
+            }
+            
+        }
+    </script> 
+    <apex:form id="f">
+        
+         <apex:pageBlock title="Show Records" id="e">
+       
+           
+           <apex:input value="{!SearchedName1}" id="someId"/>
+           
+ 	<apex:commandButton action="{!searchedRecord}" value="Search" oncomplete="b()" />
+               <apex:actionFunction name="CallApexMethod" action="{!searchedRecord}"></apex:actionFunction>
+
+
+       	<apex:pageBlockTable value="{!recordList}" var="a">
+            
+            <apex:column value="{!a.id}" />
+           	<apex:column value="{!a.Name}" />
+           
+           <apex:column >
+          				<apex:commandLink value="Details" action="{!showRelatedField}" >
+              			<apex:param name="getLink" value="{!a.id}" assignTo="{!accId}" />
+                     	</apex:commandLink>
+                     </apex:column> 
+               
+
+       	</apex:pageBlockTable>
+   </apex:pageBlock>
+        <apex:pageBlock >
+            
+            <apex:pageBlockTable value="{!conList1}"  var="b">
+                     <apex:column value="{!b.id}"/>
+            		
+        		 </apex:pageBlockTable>
+                 <apex:pageBlockTable value="{!opoList}"  var="c">
+                     <apex:column value="{!c.id}"/>
+            		 <apex:column value="{!c.Name}" />
+        		 </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

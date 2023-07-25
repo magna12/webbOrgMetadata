@@ -1,0 +1,310 @@
+<aura:component controller="AdminPageApex">
+    Test from Vs Code
+    <ltng:require styles="{! $Resource.	datatable + '/DataTables-1.10.16/media/css/jquery.dataTables.min.css'}" 
+                  scripts="{!join(',', 
+                           $Resource.jquery224 , 
+                           $Resource.datatable + '/DataTables-1.10.16/media/js/jquery.dataTables.min.js')
+                           }" afterScriptsLoaded="{!c.doinit}"/>
+    
+    <aura:attribute name="isOpen" Type="Boolean" default="false"/>
+    <aura:attribute name="chatType" Type="String" default="oneToOne"/>
+    <aura:attribute name="checkForOneToOne" Type="Boolean" default="false"/>
+    <aura:attribute name="checkForOneToMany" Type="Boolean" default="false"/>
+    <aura:attribute name="hideButton" Type="Boolean" default="true"/>
+    <aura:attribute name="hideeditAll" Type="Boolean" default="true"/>
+    <aura:attribute name="hidemessage" Type="Boolean" default="false"/>
+    <aura:attribute name="checkedNumber" Type="Boolean" default="false"/>
+    <aura:attribute name="displayList" Type="List"/>
+    <aura:attribute name="backupList" Type="List"/>
+    <aura:attribute name="oneToOneNumber" Type="List"/>
+    <aura:attribute name="oneToManyNumber" Type="List"/>
+    <aura:attribute name="displayList1" Type="List"/>
+    <aura:attribute name="CurrentRecord" Type="String" default="empty"/>
+    <aura:attribute name="checked" Type="Boolean" default="true"/>
+    <aura:attribute name="disableSave" Type="Boolean" default="true"/>
+    <aura:attribute name="disableEdit" Type="Boolean" default="false"/>
+    <aura:attribute name="isClose" Type="Boolean" default="false"/>
+    <aura:attribute name="recordIDToDelete" Type="String"/>
+    <aura:attribute name="showError" type="Boolean" default="false"/>
+    <aura:attribute name="ErrorMessage" type="String" default="Error"/>
+    <div class="slds-box">
+        <center>
+            <h2 class="slds-text-heading--medium slds-box" style="background:limegreen;color:white;"><b>SMS Admin Page</b></h2>
+        </center>
+        <br/>
+        <aura:if isTrue="{!v.isOpen}">
+            <!--MODAL BOX to create and insert new phone number--> 
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <!-- ###### MODAL BOX HEADER Start ######-->
+                    
+                    <header class="slds-modal__header">
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate"><b>Details</b></h2>
+                    </header>
+                    <!--###### MODAL BOX BODY Part Start######-->
+                    
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__label" for="text-input-id-1" id="inline-text-label"><b>Action Name</b></label>
+                            <div class="slds-form-element__control">
+                                <input required="true" id="text-input-id-0" aria-labelledby="inline-text-label" class="slds-input" type="text" />
+                            </div>
+                            <label class="slds-form-element__label" for="text-input-id-1" id="inline-text-label"><b>Phone Number</b></label>
+                            <div class="slds-form-element__control">
+                                <input id="text-input-id-1" aria-labelledby="inline-text-label" class="slds-input" type="text" />
+                            </div>
+                            <label class="slds-form-element__label" for="text-input-id-1" id="inline-text-label"><b>Flow Id</b></label>
+                            <div class="slds-form-element__control">
+                                <input id="text-input-id-3" aria-labelledby="inline-text-label" class="slds-input" type="text" />
+                            </div>
+                            <div class="slds-form-element__control slds-grid slds-gutters" style="margin-top:5px;">
+                                <div class="slds-col" style="width:0%;">
+                                    <b>Active</b>
+                                </div>
+                                <div class="slds-col" style="margin-right:84%;margin-top:3.05px;">
+                                    <span>     
+                                        <input type="checkbox" name="options" id="text-input-id-2" value="checkbox-2" style="margin-left:0%;" />
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--###### MODAL BOX FOOTER Part Start ######-->
+                    <footer class="slds-modal__footer">
+                        
+                        
+                        <div class="slds-grid slds-gutters">
+                            <div class="slds-col" style="width:25%;">
+                                <div style="float:left;">
+                                <lightning:button variant="brand" 
+                                                  label="Save"
+                                                  title="Save"
+                                                  onclick="{! c.save }"/>
+                            </div>
+                                </div>
+                            <div class="slds-col" style="width:50%;color:red;">
+                                                                <div style="float:left;">
+                                <aura:if isTrue="{!v.showError}">
+                                {!v.ErrorMessage}
+                                    </aura:if>
+                                </div>
+                        </div>
+                        <div class="slds-col" style="width:25%;">
+                            <lightning:button variant="neutral" 
+                                                    label="Cancel"
+                                                    title="Cancel"
+                                                    onclick="{! c.closeModel }"/>
+                        </div>
+                        </div>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+            <!--###### MODAL BOX Part END Here ######-->
+            
+        </aura:if>
+        
+        <div class="slds-grid ">
+            <!--div class="slds-col  tab">
+                <div class="">
+                    <button class="tablinks slds-box" style="background-color:#16325c;color:white;text-align:center;" onclick="" id="defaultOpen">Options</button>
+                </div>
+                
+            </div-->
+            <div class="slds-col " style="color:#16325c;margin-left:5%;">
+                <lightning:icon iconName="standard:marketing_actions" style="float:left;with:10px;margin-top:-3px;margin-right:1px;" alternativeText="Approved" />
+                <h1 style="margin:left:-2px;margin:top:4px;font-size:18px;"><b>Available Actions</b></h1>
+                <br/>
+                <table id="tableId" class="slds-table slds-table_bordered slds-table_cell-buffer" cellspacing="0" width="400px;position:fixed;">
+                    
+                    
+                    <thead>
+                        <tr >
+                            <th Style=" background-color: #f2f2f2;color: black;text-align: left;padding: 8px;"><b></b></th>
+                            <th Style=" background-color: #f2f2f2;color: black;text-align: left;padding: 8px;"><b>Action Name</b></th>
+                            <th Style=" background-color: #f2f2f2;color: black;text-align: left;padding: 8px;"><b>Flow Id</b></th>
+                            <th Style=" background-color: #f2f2f2;color: black;text-align: left;padding: 8px;"><b>Active Status</b></th>
+                            <th Style=" background-color: #f2f2f2;color: black;text-align: left;padding: 8px;"><b>Phone Number</b></th>
+                            <!--th Style=" background-color: #f2f2f2;color: black;text-align: left;padding: 8px;"><b>Description</b></th--> 
+                            <th Style=" background-color: #f2f2f2;color: black;text-align: left;padding: 8px;"><b></b></th>
+                            <th Style=" background-color: #f2f2f2;color: black;text-align: left;padding: 8px;"><b></b></th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <aura:iteration items="{!v.displayList}" var="acc">
+                            <tr>
+                                
+                                <aura:if isTrue="{!v.checked}">
+                                    <aura:if isTrue="{!acc.edit}">
+                                        <td><lightning:button onclick="{!c.editSingleRecord}" name="{!acc.Id}" class="slds-button slds-button_icon slds-cell-edit__button slds-m-left_x-small" tabindex="0" title="Delete Record">
+                                            <lightning:icon iconName="utility:edit" size="xx-small" alternativeText="edit"/>
+                                            </lightning:button></td>
+                                        <td >{!acc.Name}</td>
+                                        <td >{!acc.FlowId__c}</td>
+                                        <td ><ui:inputCheckbox aura:id="checkbox" change="{!c.inputOnChange}" value="{!acc.Active__c}" disabled="true"/></td>
+                                        <td >{!acc.PhoneNumber__c}</td>
+                                        <!--td >{!acc.Text_Values__c}</td-->
+                                        <aura:set attribute="else">
+                                            <td><lightning:button onclick="{!c.editSingleRecord}" name="{!acc.Id}" class="slds-hidden" tabindex="0" title="Delete Record">
+                                                <lightning:icon iconName="utility:edit" size="xx-small" alternativeText="edit"/>
+                                                </lightning:button></td>
+                                            <td >  <ui:inputText class="slds-input inputFieldWidth"
+                                                                 labelClass="slds-form-element__label slds-form-element__label_edit slds-no-flex"
+                                                                 aura:id="inputId"
+                                                                 required="true"
+                                                                 change="{!c.inputOnChange}"
+                                                                 value="{!acc.Name}" /></td>
+                                            <td ><ui:inputText class="slds-input inputFieldWidth"
+                                                               labelClass="slds-form-element__label slds-form-element__label_edit slds-no-flex"
+                                                               aura:id="inputId"
+                                                               required="true"
+                                                               change="{!c.inputOnChange}"
+                                                               
+                                                               value="{!acc.FlowId__c}" /></td>
+                                            <td >
+                                                <ui:inputCheckbox aura:id="checkbox" change="{!c.inputOnChange}" value="{!acc.Active__c}"/>
+                                                
+                                                
+                                                <!--ui:inputCheckbox class="slds-input inputFieldWidth"
+                                                               labelClass="slds-form-element__label slds-form-element__label_edit slds-no-flex"
+                                                               aura:id="inputId"
+                                                               change="{!c.inputOnChange}"
+                                                               
+                                                               required="true"
+                                                               value="{!acc.Active__c}" /--></td>
+                                            <td ><ui:inputText class="slds-input inputFieldWidth"
+                                                               labelClass="slds-form-element__label slds-form-element__label_edit slds-no-flex"
+                                                               aura:id="inputId"                                                                change="{!c.inputOnChange}"
+                                                               
+                                                               value="{!acc.PhoneNumber__c}" /></td>
+                                            <!--td ><ui:inputText class="slds-input inputFieldWidth"
+                                                               labelClass="slds-form-element__label slds-form-element__label_edit slds-no-flex"
+                                                               aura:id="inputId"
+                                                               required="true"
+                                                               value="{!acc.Text_Values__c}" /></td-->                      
+                                        </aura:set>
+                                    </aura:if>
+                                    
+                                    <aura:set attribute="else">
+                                        <td><lightning:button onclick="{!c.editSingleRecord}" name="{!acc.Id}" class="slds-hidden" tabindex="0" title="Delete Record">
+                                            <lightning:icon iconName="utility:cancel" size="xx-small" alternativeText="edit"/>
+                                            </lightning:button></td>
+                                        <td >  <ui:inputText class="slds-input inputFieldWidth"
+                                                             labelClass="slds-form-element__label slds-form-element__label_edit slds-no-flex"
+                                                             aura:id="inputId"
+                                                             required="true"
+                                                             change="{!c.inputOnChange}"
+                                                             
+                                                             value="{!acc.Name}" /></td>
+                                        <td ><ui:inputText class="slds-input inputFieldWidth"
+                                                           labelClass="slds-form-element__label slds-form-element__label_edit slds-no-flex"
+                                                           aura:id="inputId"
+                                                           required="true"
+                                                           change="{!c.inputOnChange}"
+                                                           
+                                                           value="{!acc.FlowId__c}" /></td>
+                                        <td >
+                                            <ui:inputCheckbox aura:id="checkbox" change="{!c.inputOnChange}" value="{!acc.Active__c}"/>
+                                            <!--ui:inputText class="slds-input inputFieldWidth"
+                                                           labelClass="slds-form-element__label slds-form-element__label_edit slds-no-flex"
+                                                           aura:id="inputId"
+                                                           required="true"
+                                                           change="{!c.inputOnChange}"
+                                                           
+                                                           value="{!acc.Active__c}" /--></td>
+                                        <td ><ui:inputText class="slds-input inputFieldWidth"
+                                                           labelClass="slds-form-element__label slds-form-element__label_edit slds-no-flex"
+                                                           aura:id="inputId"
+                                                           change="{!c.inputOnChange}"
+                                                           
+                                                           value="{!acc.PhoneNumber__c}" /></td>
+                                        <!--td ><ui:inputText class="slds-input inputFieldWidth"
+                                                           labelClass="slds-form-element__label slds-form-element__label_edit slds-no-flex"
+                                                           aura:id="inputId"
+                                                           required="true"
+                                                           change="{!c.inputOnChange}"
+                                                           
+                                                           value="{!acc.Text_Values__c}" /></td--> 
+                                    </aura:set>
+                                </aura:if>
+                                
+                                <td><lightning:button onclick="{!c.confirmdeletingRecord}" name="{!acc.Id}" class="slds-button slds-button_icon slds-cell-edit__button slds-m-left_x-small" tabindex="0" title="Delete Record">
+                                    <lightning:icon iconName="utility:delete" size="xx-small" alternativeText="edit"/>
+                                    </lightning:button></td>
+                            </tr>
+                        </aura:iteration>  
+                    </tbody>
+                    
+                </table>
+                
+                <aura:if isTrue="{!v.hideeditAll}">
+                    <lightning:button label="Edit All" title="Neutral action" iconName="utility:edit" iconPosition="right" onclick="{!c.EditRecord}" class="slds-m-left_x-medium" disabled="{!v.disableEdit}"> </lightning:button>
+                    <aura:set attribute="else">
+                        <lightning:button label="Cancel" title="Neutral action" iconName="utility:close" iconPosition="right" onclick="{!c.CancelEditing}" class="slds-m-left_x-medium" > </lightning:button>
+                    </aura:set>
+                </aura:if>
+                <lightning:button label="Save" title="Neutral action" iconName="utility:save" iconPosition="right" onclick="{!c.saveRecord}" class="slds-m-left_x-medium" disabled="{!v.disableSave}" > </lightning:button>
+                
+            </div>
+            
+            <div class="slds-col ">
+                <aura:if isTrue="{!v.hideButton}">
+                    <button style="width:70%;height:50px;margin-top:40%;margin-left:45%;position:relative;" onclick="{!c.myAction}" class="slds-button slds-button_brand"  iconPosition="left" >+Create New Action</button>
+                </aura:if>
+                <aura:if isTrue="{!v.checkForOneToMany}">
+                    
+                    <span>
+                        <div class="picklist">
+                            <lightning:select aura:id="select" name="select" label="Select receiver type" onchange="{! c.showAvailableContacts }">
+                                <option value="">choose one...</option>
+                                <option value="Contacts">Contacts</option>
+                                <option value="Campaign">Campaign</option>
+                            </lightning:select>
+                        </div>
+                    </span>
+                </aura:if>
+                
+            </div>
+            <div class="slds-col ">
+                <aura:if isTrue="{!v.hidemessage}">
+                    <textarea class="slds-textarea">
+                        
+                    </textarea>
+                    <div style="float:right;">
+                        <lightning:button class="slds-button slds-button_brand" label="Send"></lightning:button>
+                    </div>
+                </aura:if>
+                
+            </div>
+        </div>
+        
+    </div>
+    <aura:if isTrue="{!v.isClose}">
+        <div class="slds-box">
+            <!--MODAL BOX to create and insert new phone number--> 
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <!-- ###### MODAL BOX HEADER Start ######-->
+                    
+                    <header class="slds-modal__header">
+                        <h4 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate"><b>Are you sure you want to delete this Action?</b></h4>
+                        
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <lightning:button label="Yes" title="Neutral action" iconName="utility:check" iconPosition="right" onclick="{!c.DeleteRecord}" class="slds-m-left_x-medium" > </lightning:button>
+                        <lightning:button label="No" title="Neutral action" iconName="utility:close" iconPosition="right" onclick="{!c.cancelDeletingrecord}" class="slds-y-left_x-medium" > </lightning:button>
+                    </div>
+                    
+                </div>
+                <footer class="slds-modal__footer">
+                    
+                </footer>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+            <!--###### MODAL BOX Part END Here ######-->
+            
+            
+        </div>
+    </aura:if>
+</aura:component>

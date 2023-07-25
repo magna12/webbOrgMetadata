@@ -1,0 +1,18 @@
+<template>
+    <div class="ContainerDiv">
+    <lightning-card title="Order Details" icon-name="standard:fulfillment_order">
+        <lightning-accordion aura:id="accordian" active-section-name="B">
+
+            <template for:each={Orderdetails} for:item="orderinst">
+             
+                <lightning-accordion-section name={orderinst.wrap_OrderNumber} label={orderinst.wrap_OrderNumber} key={orderinst.wrap_OrderId}>
+                    <c-order-Product-Details productlist={orderinst.OrderItems}>
+
+                    </c-order-Product-Details>
+                </lightning-accordion-section>
+            </template>
+            
+        </lightning-accordion>
+    </lightning-card>
+</div>
+</template>

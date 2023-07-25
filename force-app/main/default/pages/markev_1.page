@@ -1,0 +1,26 @@
+<apex:page controller="markea_1" docType="html-5.0" >
+  <script>
+
+function OpenPage(){
+    var win=window.open('https://ap5.salesforce.com/006/e?retURL=%2F006%2Fo');
+    
+}
+</script>
+<apex:form >
+<apex:pageBlock >
+       
+            <apex:commandButton value="New" onclick="OpenPage()">
+            </apex:commandButton>
+        
+    </apex:pageBlock>
+</apex:form>
+    <apex:pageBlock >
+        <apex:pageBlockTable value="{!myOpportunities}"  var="b">
+                     <apex:column value="{!b.id}"/>
+            		 <apex:column value="{!b.Name}" />
+                        		 <apex:column value="{!b.Amount}" />
+
+        		 </apex:pageBlockTable>
+    </apex:pageBlock>
+
+</apex:page>

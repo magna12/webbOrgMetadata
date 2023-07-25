@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>company</fullName>
+    <active>true</active>
+    <errorConditionFormula>LOWER( Company )=&apos;google&apos;</errorConditionFormula>
+    <errorMessage>Google employee cant be our customers</errorMessage>
+</ValidationRule>

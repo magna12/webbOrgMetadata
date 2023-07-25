@@ -1,0 +1,63 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="chats" type="List" />
+    
+    
+    <!--Displaying Sent Messages-->
+    <aura:if isTrue="{!v.chats.Type__c == 'Sent' }" >
+        <aura:if isTrue="{!v.chats.Status__c=='Failed'}">
+            <span class="slds-avatar slds-float_right">
+            <img alt="Person name" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoYTmVHN0MQ0BYnYx86zUZKpd-xniSMmk8ZtaDMyfYiVPGsv7QmA" title="User avatar" />
+            
+        </span>   
+        <section class="slds-popover slds-box slds-nubbin_right-top-corner slds-float_right left" style="width:83%;border-radius:6px;" role="dialog" aria-label="Dialog Title" aria-describedby="dialog-body-id-32">
+            <div class="slds-popover__body" id="dialog-body-id-32">
+                <p>{!v.chats.Message__c}</p>
+            </div>
+        </section>
+            <p style="color:red;text-align:start;margin-left: 7%;">Message Sent was unsuccessful</p>
+                <aura:set attribute="else">
+                    <span class="slds-avatar slds-float_right">
+            <img alt="Person name" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoYTmVHN0MQ0BYnYx86zUZKpd-xniSMmk8ZtaDMyfYiVPGsv7QmA" title="User avatar" />
+            
+        </span>   
+        <section class="slds-popover slds-box slds-nubbin_right-top-corner slds-float_right left" style="width:83%;border-radius:6px;" role="dialog" aria-label="Dialog Title" aria-describedby="dialog-body-id-32">
+            <div class="slds-popover__body" id="dialog-body-id-32">
+                <p>{!v.chats.Message__c}</p>
+            </div>
+        </section>
+                        <h1 style="text-align:start;margin-left: 7%;">{!v.chats.Text_Values__c}</h1>
+        <h1 style="text-align:start;margin-left:7%;font-style:italic;">{!v.chats.timeMsg}</h1>
+            </aura:set>
+        </aura:if>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <br/><br/>
+        
+    </aura:if>
+        <!--Displaying Received Messages-->
+
+    <aura:if isTrue="{!v.chats.Type__c == 'Received' }" >
+        
+        <span class="slds-avatar slds-float_left">
+            <img alt="Person name" src="https://cdn.icon-icons.com/icons2/582/PNG/512/wonder-women_icon-icons.com_55030.png" title="User avatar" />
+        </span>
+        <section class="slds-popover slds-box slds-nubbin_left-top-corner slds-float_left right" style="width:83%;" role="dialog" aria-label="Dialog Title" aria-describedby="dialog-body-id-36">
+            
+            <div class="slds-popover__body" id="dialog-body-id-36">
+                <p>{!v.chats.Message__c}</p>
+            </div>
+        </section>
+        <br/><br/>
+        <h1 style="text-align:end;margin-right: 7%">{!v.chats.timeMsg}</h1>
+        <br/><br/>
+    </aura:if>
+    
+</aura:component>

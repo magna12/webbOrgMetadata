@@ -1,0 +1,13 @@
+<template>
+    <lightning-card title="10 Recent Cases" icon-name="custom:custom11">
+        <template if:true={CaseList}>
+
+            <lightning-datatable data = {CaseList} columns = {columns} key-field = "Id">
+
+            </lightning-datatable> 
+        </template>
+        <template if:true={error}>
+            {error}
+        </template>
+    </lightning-card>
+</template>

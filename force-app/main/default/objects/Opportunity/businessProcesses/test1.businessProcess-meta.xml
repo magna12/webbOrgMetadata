@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BusinessProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>test1</fullName>
+    <isActive>true</isActive>
+    <values>
+        <fullName>Needs Analysis</fullName>
+        <default>false</default>
+    </values>
+    <values>
+        <fullName>Prospecting</fullName>
+        <default>false</default>
+    </values>
+    <values>
+        <fullName>Qualification</fullName>
+        <default>false</default>
+    </values>
+    <values>
+        <fullName>Value Proposition</fullName>
+        <default>false</default>
+    </values>
+</BusinessProcess>

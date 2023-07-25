@@ -1,0 +1,9 @@
+<apex:page standardController="Registered_User__c" extensions="testobject2">
+
+<apex:form >
+<apex:commandButton action="{!savetest}" value="Save" id="theButton"/>
+Name <apex:inputfield value="{!testobj2.Name}"/>
+</apex:form>
+
+
+</apex:page>

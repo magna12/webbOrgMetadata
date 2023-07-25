@@ -1,0 +1,33 @@
+<apex:page controller="promark1" docType="html-5.0">
+    <apex:form >
+        <apex:commandButton value="Show Pop up" action="{!showPopup}" rerender="tstpopup"/>
+        <apex:pageBlock >
+            This is just filler text from the Salesforce General. 
+        </apex:pageBlock>
+ 
+        <apex:outputPanel id="tstpopup">
+        <apex:outputPanel styleClass="popupBackground" layout="block" rendered="{!displayPopUp}"/>
+            <apex:outputPanel styleClass="custPopup" layout="block" rendered="{!displayPopUp}">
+                <apex:input title="hh"/>
+                <apex:commandButton value="Hide Pop up" action="{!closePopup}" rerender="tstpopup"/>
+            </apex:outputPanel>
+        </apex:outputPanel>
+ 
+    </apex:form>
+ 
+    <style type="text/css">
+        .custPopup{
+            background-color: white;
+            border-width: 2px;
+            border-style: solid;
+            z-index: 9999;
+            left: 50%;
+            padding:10px;
+            position: absolute;
+            width: 500px;
+            margin-left: -250px;
+            top:100px;
+        }
+       
+    </style>
+</apex:page>

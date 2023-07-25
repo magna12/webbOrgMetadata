@@ -1,0 +1,5 @@
+<design:component label="Hello World">
+    <design:attribute name="recordId" label="Subject" description="Name of the person you want to greet" />
+    <design:attribute name="readonly" label="Greeting" />
+        <design:attribute name="PickList" label="PickList Label" />
+</design:component>

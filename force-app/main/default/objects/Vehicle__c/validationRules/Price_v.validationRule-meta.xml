@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Price_v</fullName>
+    <active>true</active>
+    <errorConditionFormula>Price__c &gt;=500000</errorConditionFormula>
+    <errorMessage>input price less then 5lacks</errorMessage>
+</ValidationRule>

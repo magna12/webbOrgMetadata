@@ -1,0 +1,8 @@
+<apex:page controller="PdfGeneratorController" docType="html-5.0" action="{!save}" >
+    <apex:pageBlock >
+    <apex:pageBlockTable value="{!rcc}" var="a">
+           	<apex:column value="{!a.id}" />
+           	<apex:column value="{!a.Name}" />
+       	</apex:pageBlockTable>
+        </apex:pageBlock>
+</apex:page>

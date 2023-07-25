@@ -1,0 +1,79 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    
+    <aura:attribute Name="country" type="List"/>
+    <aura:attribute Name="hide" type="Boolean" default="false"/>
+    <aura:attribute name="selectedValue" type="String"/>
+    <aura:attribute name="format1" type="List"/> 
+    <aura:attribute name="format2" type="List"/>   
+    <aura:attribute name="format3" type="List"/>
+    <aura:attribute name="dateOutput" type="Date"/>
+    <aura:attribute name="inputDate" type="Date"/>
+    <aura:attribute name="output" type="String"/>
+
+    
+    
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+    
+    
+    <lightning:layout class="slds-page-header slds-page-header--object-home">
+        <lightning:layoutItem>
+            <lightning:icon iconName="utility:weeklyview" alternativeText="My Expenses"/>
+        </lightning:layoutItem>
+        <lightning:layoutItem padding="horizontal-small">
+            <div class="page-section page-header">
+                <h6 class="slds-text-heading--medium"><b>Date Format</b></h6>
+            </div>
+        </lightning:layoutItem>
+    </lightning:layout>
+    
+    
+    <div aria-labelledby="newexpenseform">
+      <fieldset class="slds-box slds-theme--default slds-container--small">
+            	<div class="slds-align_absolute-center">
+					<legend id="newexpenseform" class="slds-text-heading--small slds-p-vertical--medium">
+                		<h3 class="slds-text-heading--medium"><b>Check Date</b></h3>
+   					 </legend>
+                </div>
+
+       	 
+          
+          <form class="slds-form--stacked"> 
+            <div class="slds-grid slds-gutters">
+  				<div class="slds-col">
+					<lightning:select class="slds-combobox-picklist" name="colorId" label="𝐂𝐨𝐮𝐧𝐭𝐫𝐲:" aura:id="colorId" value="{!v.selectedValue}">
+       					 <aura:iteration items="{!v.country}" var="option">
+                             <option value='{!option}' selected="{!option.selected}" onclick="{!c.changeFormat}">{!option}</option>
+       					 </aura:iteration>
+    				</lightning:select>
+       			 </div>
+ 				 <div class="slds-col">
+                        <lightning:input value="{!v.inputDate}" class="slds-input_bare1" type="date" name="input4" label="𝐈𝐧𝐩𝐮𝐭 𝐃𝐚𝐭𝐞" placeholder="YYYY-MM-DD"/>
+                 </div>
+            </div>
+              <br/>
+              
+              <div class="slds-align_absolute-center">
+                  <lightning:button  class="slds-button slds-button_brand" onclick="{!c.changeFormat}">Check</lightning:button>
+              </div>
+                        		<aura:if isTrue="{!v.hide}">
+
+              <div class="slds-align_absolute-center">
+                    <lightning:input value="{!v.dateOutput}" class="slds-input_bare" type="date" name="input7" label="𝐃𝐚𝐭𝐞 𝐰𝐢𝐭𝐡 𝐟𝐨𝐫𝐦𝐚𝐭" disabled="true"  />
+
+              </div>
+                    <lightning:input value="{!v.output}" class="slds-input_bare2" type="Text" name="input7" label="𝐂𝐨𝐦𝐩𝐨𝐧𝐞𝐧𝐭 𝐒𝐭𝐫𝐢𝐧𝐠"/>
+                </aura:if>
+
+        </form>
+          
+          
+          
+          
+  
+      </fieldset>
+    </div>
+    <lightning:layout>
+        <lightning:layoutItem padding="around-small" size="6">
+        </lightning:layoutItem>
+    </lightning:layout>
+</aura:component>
